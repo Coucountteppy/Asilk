@@ -5,6 +5,7 @@ import pywhatkit
 import datetime
 import os
 import random
+import pafy
 
 while True:
   r = sr.Recognizer()
@@ -18,14 +19,17 @@ while True:
       
       #imprimir funciones y que hacen
       if "Funciones" in texto:
-        print("Contacto: habre el link de mi contacto 'solo dí Contacto' ")
-        print("Youtube: abre el video que haz dicho 'solo dí Youtube y el nombre del video' ")
-        print("Hora: muestra la fecha y hora actual 'solo dí Hora' ")
-        print("Listar: ver tus archivos y directos 'solo dí listar")
-        print("Ip: muestra tú IP 'dí cual es mi ip' para mostrarla")
-        print("Salir: sales del programa y terminal 'Solo dí Salir' ")
-        print("Jugar: te deja elegir un juego 'Solo dí jugar para empezar' ")
-        print("Despedida: se despide y da creditos 'Solo dí Despedida' ")
+        print("Contacto: habre el link de mi contacto")
+        print("Youtube: abre el video que haz dicho 'dí Youtube y el nombre del video' ")
+        print("Hora: muestra la fecha y hora actual")
+        print("Clima: muestra el clima y temperatura actual")
+        print("Listar: ver tus archivos y directos")
+        print("Ip: muestra tu IP")
+        print("Salir: sales del programa")
+        print("Jugar: te deja elegir un juego")
+        print("Despedida: se despide, da creditos y cierra el programa")
+        print("Descargar: descarga audio / video de un video de youtube")
+        print ("💢 Para usarlos dí una frase que contenga la palabra de la función o dí solo la función 💢")
       
       #mi contacto
       if "Contacto" in texto:
@@ -34,7 +38,19 @@ while True:
       #abriendo y reproduciendo video de youtube
       if "Youtube" in texto:
         pywhatkit.playonyt(texto)
-        
+      if "Descargar" in texto:
+        video = int(input("Quieres descargar video[1] o audio[2]: "))
+        if video == 1:
+          vid = pafy.new(input("Ingresa el URL de tu video (mp4): "))
+          des = vid.getbest(preftype="mp4")
+          des.download()
+          print("Descarga completa")
+        if video == 2:
+          aud = pafy.new(input("Ingresa el URL de tu video (mp3): "))
+          desaud = aud.getbestaudio()
+          desaud.download
+          print ("Descarga completa")
+          
       #conversación
       if "hola" in texto:
         print("Hola")
@@ -64,6 +80,7 @@ while True:
       if "Jugar" in texto:
         print("1- numero aleatorio")
         print("2- encuesta")
+        print("3- Cara o Cruz")
         juego = int(input("Escribe el numero de tu juego: "))
         if juego == 1:
           numero = random.randint(1, 5)
@@ -92,7 +109,14 @@ while True:
           else:
             print("incorreto")
           print ("Fin del juego")
-          
+        if juego == 3:
+          lis = ["Cara", "Cruz"]
+          ran = random.choice(lis)
+          ca = input("Cara o Cruz: ")
+          if ran == lis:
+            print("correcto")
+          else:
+            print("incorrecto, la respuesta es ", ran)
        #despedida
        if "despedirse" in texto:
          print ("Adios")
@@ -100,5 +124,6 @@ while True:
          print("Mucho gusto de conocerle")
          print ("Proyecto hecho para Valletta")
          print ("Hecho por Coucountteppy/Dezzmain/Sinko")
+         os.system ("exit")
     except:
       print("Función no encontrada o no se le ha escuchado")
