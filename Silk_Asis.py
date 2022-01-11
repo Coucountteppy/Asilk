@@ -49,6 +49,8 @@ while True:
       if "hora" in texto:
         print ("Tú hora es:")
         datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+      if "clima" in texto:
+        os.system("curl http://v2.wttr.in/")
        
       #ejecutar comandos
       if "listar" in texto:
