@@ -98,3 +98,5 @@ while True:
          print("Mucho gusto de conocerle")
          print ("Proyecto hecho para Valletta")
          print ("Hecho por Coucountteppy/Dezzmain/Sinko")
+    except:
+      print("Función no encontrada o no se le ha escuchado")
